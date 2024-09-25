@@ -1,0 +1,34 @@
+
+import javax.swing.JOptionPane; 
+
+/**
+ * @param public classe do tipo publico
+ * @param Addition  nome da classe a ser declarada 
+ */
+public class Addition 
+{
+   /**
+    * @param main esta sendi declarado o metodo main que vai executar o app
+    */
+   public static void main(String[] args)
+   {
+
+   /*
+    *  Solicita o primeiro número ao usuário do tipo String
+    */
+      String firstNumber = 
+         JOptionPane.showInputDialog("Enter first integer");
+      String secondNumber =
+         JOptionPane.showInputDialog("Enter second integer");
+
+
+      int number1 = Integer.parseInt(firstNumber); 
+      int number2 = Integer.parseInt(secondNumber);
+
+      int sum = number1 + number2; 
+
+
+      JOptionPane.showMessageDialog(null, "The sum is " + sum, 
+         "Sum of Two Integers", JOptionPane.PLAIN_MESSAGE);
+   } 
+} 
