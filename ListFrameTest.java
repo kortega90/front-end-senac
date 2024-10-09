@@ -15,24 +15,24 @@ public class ListFrameTest extends JFrame {
             Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK,
             Color.RED, Color.WHITE, Color.YELLOW};
 
-    private static final String[] sizeNames = {"Small", "Medium", "Large"}; // Corrected capitalization for consistency
+    private static final String[] sizeNames = {"Small", "Medium", "Large"}; 
 
     public ListFrameTest() {
         super("List Test");
         setLayout(new FlowLayout());
 
-        // Create color list
+
         colorJList = new JList<>(colorNames);
         colorJList.setVisibleRowCount(5);
         colorJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        colorJList.addListSelectionListener(this::colorListSelectionChanged); // Use method reference for cleaner syntax
+        colorJList.addListSelectionListener(this::colorListSelectionChanged); 
 
    
         sizeJList = new JList<>(sizeNames);
         sizeJList.setSelectedIndex(0); 
-        sizeJList.addListSelectionListener(this::sizeListSelectionChanged); // Use method reference for cleaner syntax
+        sizeJList.addListSelectionListener(this::sizeListSelectionChanged);
 
-        // Add scroll panes for both lists
+
         JScrollPane colorScrollPane = new JScrollPane(colorJList);
         JScrollPane sizeScrollPane = new JScrollPane(sizeJList);
 
