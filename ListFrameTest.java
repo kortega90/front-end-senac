@@ -30,6 +30,7 @@ public class ListFrameTest extends JFrame {
    
         sizeJList = new JList<>(sizeNames);
         sizeJList.setSelectedIndex(0); 
+        sizeJList.setVisibleRowCount(2);
         sizeJList.addListSelectionListener(this::sizeListSelectionChanged);
 
 
