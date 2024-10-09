@@ -76,6 +76,6 @@ public class ListFrameTest extends JFrame {
     }
 
     public static void main(String[] args) {
-        ListFrameTest ListFrameTest = new ListFrameTest();
+       new ListFrameTest();
     }
 }
