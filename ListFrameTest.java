@@ -9,11 +9,11 @@ public class ListFrameTest extends JFrame {
 
     private static final String[] colorNames = {"Black", "Blue", "Cyan",
             "Dark Gray", "Gray", "Green", "Light Gray", "Magenta",
-            "Orange", "Pink", "Red", "White", "Yellow"};
+            "Orange", "Pink", "Red", "White", "Yellow", "Peru"};
     private static final Color[] colors = {Color.BLACK, Color.BLUE,
             Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN,
             Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK,
-            Color.RED, Color.WHITE, Color.YELLOW};
+            Color.RED, Color.WHITE, Color.YELLOW, new Color(205,133,63)};
 
     private static final String[] sizeNames = {"Small", "Medium", "Large"}; 
 
