@@ -13,34 +13,38 @@ public class ListFrameTest extends JFrame {
     private static final Color[] colors = {Color.BLACK, Color.BLUE,
             Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN,
             Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK,
-            Color.RED, Color.WHITE, Color.YELLOW, new Color(205,133,63)};
+            Color.RED, Color.WHITE, Color.YELLOW, new Color(205, 133, 63)};
 
-    private static final String[] sizeNames = {"Small", "Medium", "Large"}; 
+    private static final String[] sizeNames = {"Small", "Medium", "Large"};
 
     public ListFrameTest() {
         super("List Test");
         setLayout(new FlowLayout());
 
-
+        // Create JLists
         colorJList = new JList<>(colorNames);
         colorJList.setVisibleRowCount(5);
         colorJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        colorJList.addListSelectionListener(this::colorListSelectionChanged); 
+        colorJList.addListSelectionListener(this::colorListSelectionChanged);
 
-   
         sizeJList = new JList<>(sizeNames);
-        sizeJList.setSelectedIndex(0); 
+        sizeJList.setSelectedIndex(0);
         sizeJList.setVisibleRowCount(2);
         sizeJList.addListSelectionListener(this::sizeListSelectionChanged);
 
+        // Create scroll panes with custom renderer for consistent color highlighting
+        JScrollPane colorScrollPane = new JScrollPane(colorJList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        colorScrollPane.setViewportView(colorJList);
+        colorJList.setCellRenderer(new CustomListCellRenderer(colors));
 
-        JScrollPane colorScrollPane = new JScrollPane(colorJList);
-        JScrollPane sizeScrollPane = new JScrollPane(sizeJList);
+        JScrollPane sizeScrollPane = new JScrollPane(sizeJList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        sizeScrollPane.setViewportView(sizeJList);
 
-  
+        // Add components and set initial size
         add(colorScrollPane);
         add(sizeScrollPane);
-
         setSize(getSizeForSizeSelection(sizeJList.getSelectedValue()));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,14 +53,16 @@ public class ListFrameTest extends JFrame {
 
     private void colorListSelectionChanged(ListSelectionEvent event) {
         int selectedIndex = colorJList.getSelectedIndex();
-        if (selectedIndex != -1) { 
+        if (selectedIndex != -1) {
+            // Update both frame background and selected item background
             getContentPane().setBackground(colors[selectedIndex]);
+            colorJList.setSelectedIndex(selectedIndex); // Reset focus (optional)
         }
     }
 
     private void sizeListSelectionChanged(ListSelectionEvent event) {
         int selectedIndex = sizeJList.getSelectedIndex();
-        if (selectedIndex != -1) { 
+        if (selectedIndex != -1) {
             String selectedSize = sizeNames[selectedIndex];
             setSize(getSizeForSizeSelection(selectedSize));
         }
@@ -75,7 +81,28 @@ public class ListFrameTest extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-       new ListFrameTest();
+    // Custom renderer to highlight selected item with consistent background color
+    private static class CustomListCellRenderer extends DefaultListCellRenderer {
+        private final Color[] colors;
+
+        public CustomListCellRenderer(Color[] colors) {
+            this.colors = colors;
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (isSelected) {
+                setBackground(colors[index]);
+            } else {
+                setBackground(list.getBackground()); // Use default background for unselected items
+            }
+            return this;
+        }
     }
-}
+
+    public static void main(String[] args) {
+        new ListFrameTest();
+      }
+   }
